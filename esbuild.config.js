@@ -13,6 +13,7 @@ let renamePlugin = {
     setup(build) {
         build.onEnd(() => {
             const { outfile } = build.initialOptions;
+            console.log(outfile);
             const outcss = outfile.replace(/\.js$/, '.css');
             const fixcss = outfile.replace(/main\.js$/, 'styles.css');
             if (fs.existsSync(outcss)) {
@@ -30,5 +31,5 @@ module.exports = {
     define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.BUILD),
     },
-    plugins: [renamePlugin],
+    // plugins: [renamePlugin],
 };

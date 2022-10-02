@@ -33,6 +33,11 @@ export function NestedFolders(props: NestedFoldersProps) {
         if (excludedFolders.length > 0) {
             newTree = newTree.filter((tree) => !excludedFolders.contains(tree.folder.path));
         }
+        // 排除assets文件夹
+        newTree = newTree.filter((tree) => {
+            return !tree.folder.path.endsWith('/assets');
+        });
+
         newTree = newTree.sort((a, b) => {
             if (plugin.settings.sortFoldersBy === 'name') {
                 return a.folder.name.localeCompare(b.folder.name, 'en', { numeric: true });
@@ -53,7 +58,7 @@ export function NestedFolders(props: NestedFoldersProps) {
         if (event === undefined) e = window.event as MouseEvent;
 
         // Menu Items
-        const folderMenu = new Menu(plugin.app);
+        const folderMenu = new Menu();
 
         // Focus Items
         if (Util.hasChildFolder(folder)) {

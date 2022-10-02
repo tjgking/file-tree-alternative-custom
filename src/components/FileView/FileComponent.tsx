@@ -79,6 +79,13 @@ export function FileComponent(props: FilesProps) {
                 return true;
             });
         }
+        // 排除assets文件夹
+        sortedfileList = sortedfileList.filter((file) => {
+            if (file.path.match("\/assets\/")) {
+                return false;
+            }
+            return true;
+        });
         // Remove Files for Folder Note (If file name is same as parent folder name)
         if (plugin.settings.folderNote) {
             sortedfileList = sortedfileList.filter((f) => f.basename !== f.parent.name);
